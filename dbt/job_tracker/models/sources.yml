@@ -1,0 +1,102 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw data from job scraping and external sources"
+    tables:
+      - name: scrapes
+        description: "Raw scraping run metadata"
+        columns:
+          - name: scrape_id
+            description: "Unique identifier for each scraping run"
+            tests:
+              - unique
+              - not_null
+          - name: run_at
+            description: "Timestamp when the scraping run was executed"
+          - name: search_keyword
+            description: "The keyword used for job search"
+          - name: location_id
+            description: "LinkedIn location identifier"
+          - name: jobs_found
+            description: "Number of jobs found in this scraping run"
+
+      - name: companies
+        description: "Raw company information from job postings"
+        columns:
+          - name: company_id
+            description: "Unique identifier for each company"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: "Company name"
+          - name: company_url
+            description: "Company website URL"
+          - name: description
+            description: "Company description"
+          - name: staff_count
+            description: "Number of employees"
+          - name: industries
+            description: "Array of industry categories"
+          - name: logo_url
+            description: "URL to company logo"
+
+      - name: jobs
+        description: "Raw job postings data"
+        columns:
+          - name: job_id
+            description: "Unique identifier for each job posting"
+            tests:
+              - unique
+              - not_null
+          - name: job_title
+            description: "Job title"
+          - name: job_url
+            description: "URL to the job posting"
+          - name: location
+            description: "Job location"
+          - name: remote_status
+            description: "Remote work status"
+          - name: posted_at
+            description: "When the job was posted"
+          - name: job_type
+            description: "Type of employment"
+          - name: is_easy_apply
+            description: "Whether the job has easy apply option"
+          - name: description
+            description: "Full job description"
+          - name: employment_status
+            description: "Employment status"
+          - name: experience_level
+            description: "Required experience level"
+          - name: is_remote_allowed
+            description: "Whether remote work is allowed"
+          - name: company_id
+            description: "Foreign key to companies table"
+          - name: scrape_id
+            description: "Foreign key to scrapes table"
+
+      - name: salaries
+        description: "Raw salary information for job postings"
+        columns:
+          - name: job_id
+            description: "Foreign key to jobs table"
+          - name: min_salary
+            description: "Minimum salary"
+          - name: max_salary
+            description: "Maximum salary"
+          - name: currency_code
+            description: "Currency code"
+
+      - name: application_status
+        description: "Raw application tracking data"
+        columns:
+          - name: job_id
+            description: "Foreign key to jobs table"
+          - name: status
+            description: "Application status"
+          - name: notes
+            description: "Additional notes about the application"
+          - name: last_updated
+            description: "Timestamp of last status update" 
