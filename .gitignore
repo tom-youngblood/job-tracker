@@ -5,3 +5,4 @@ __pycache__/
 *.sqlite
 superset/
 logs/
+.DS_Store
